@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC Paycheck Calculator - Estimate Your Take-Home Pay</title>
+<meta name="description" content="Free Washington DC paycheck calculator. Estimate your take-home pay after federal tax, DC state tax, and FICA.">
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;line-height:1.6;color:#222;background:#fff}
+h1{font-size:26px;color:#1e3a5f}
+h2{font-size:20px;color:#1e3a5f;margin-top:30px}
+label{font-weight:bold;display:block;margin-top:14px}
+input,select{width:100%;padding:10px;margin:6px 0 14px;border:1px solid #ccc;border-radius:6px;font-size:16px;box-sizing:border-box}
+button{background:#1e3a5f;color:#fff;border:none;padding:14px 24px;font-size:18px;border-radius:8px;cursor:pointer;width:100%}
+button:hover{background:#2d5a8e}
+.result{background:#f0f7ff;border:1px solid #bfdbfe;padding:16px;border-radius:8px;margin-top:16px;font-size:18px}
+.big{font-size:28px;font-weight:bold;color:#10b981}
+.ad{background:#f5f5f5;border:1px dashed #ccc;text-align:center;padding:20px;margin:20px 0;color:#888;font-size:14px}
+.faq p{font-weight:bold;margin-bottom:4px}
+.footer{font-size:12px;color:#888;margin-top:40px;border-top:1px solid #eee;padding-top:20px}
+</style>
+</head>
+<body>
+
+<h1>DC Paycheck Calculator</h1>
+<p>Estimate your take-home pay in Washington DC after federal tax, DC state tax, and FICA.</p >
+
+<div class="ad">Advertisement</div>
+
+<label>Annual Salary ($)</label>
+<input type="number" id="salary" placeholder="e.g. 75000" value="75000">
+
+<label>Pay Frequency</label>
+<select id="freq">
+<option value="26">Bi-weekly (26 paychecks/year)</option>
+<option value="24">Semi-monthly (24 paychecks/year)</option>
+<option value="12">Monthly (12 paychecks/year)</option>
+<option value="52">Weekly (52 paychecks/year)</option>
+</select>
+
+<label>Filing Status</label>
+<select id="status">
+<option value="single">Single</option>
+<option value="married">Married Filing Jointly</option>
+</select>
+
+<button onclick="calc()">Calculate Take-Home Pay</button>
+
+<div class="result" id="result"></div>
+
+<div class="ad">Advertisement</div>
+
+<h2>How This DC Paycheck Calculator Works</h2>
+<p>This calculator estimates your take-home pay in Washington DC. It subtracts federal income tax, DC state income tax, Social Security, and Medicare from your gross salary.</p >
+<p><strong>DC income tax rates:</strong> 4% to 10.75% depending on income level.</p >
+<p><strong>Federal tax:</strong> Based on 2025 federal tax brackets.</p >
+<p><strong>FICA:</strong> 6.2% Social Security + 1.45% Medicare.</p >
+
+<h2>DC Paycheck Calculator FAQ</h2>
+<div class="faq">
+<p>What is the average take-home pay in DC?</p >
+<p>It depends on your salary and filing status. This calculator gives you an instant estimate.</p >
+<p>Does DC have state income tax?</p >
+<p>Yes. DC has its own income tax system with rates from 4% to 10.75%.</p >
+<p>What is FICA?</p >
+<p>FICA includes Social Security (6.2%) and Medicare (1.45%).</p >
+</div>
+
+<div class="footer">
+<p>Disclaimer: This calculator provides estimates only. Not official, final, or binding. Not tax, legal, or financial advice.</p >
+<p>Privacy Policy | About Us | Contact</p >
+</div>
+
+<script>
+function calc(){
+var salary=parseFloat(document.getElementById('salary').value)||0;
+var freq=parseInt(document.getElementById('freq').value)||26;
+var status=document.getElementById('status').value;
+
+var gross=salary/freq;
+
+var fedTax=0;
+if(status==='single'){
+if(salary<=11925)fedTax=salary*0.10;
+else if(salary<=48475)fedTax=1192.5+(salary-11925)*0.12;
+else if(salary<=103350)fedTax=5578.5+(salary-48475)*0.22;
+else fedTax=17639+(salary-103350)*0.24;
+}else{
+if(salary<=23850)fedTax=salary*0.10;
+else if(salary<=96950)fedTax=2385+(salary-23850)*0.12;
+else if(salary<=206700)fedTax=11157+(salary-96950)*0.22;
+else fedTax=35292+(salary-206700)*0.24;
+}
+var fedPer=fedTax/freq;
+
+var dcTax=0;
+if(salary<=10000)dcTax=salary*0.04;
+else if(salary<=40000)dcTax=400+(salary-10000)*0.06;
+else if(salary<=60000)dcTax=2200+(salary-40000)*0.065;
+else if(salary<=350000)dcTax=3500+(salary-60000)*0.085;
+else dcTax=28150+(salary-350000)*0.0925;
+var dcPer=dcTax/freq;
+
+var ss=Math.min(salary,176100)*0.062;
+var medicare=salary*0.0145;
+var ficaPer=(ss+medicare)/freq;
+
+var net=gross-fedPer-dcPer-ficaPer;
+
+document.getElementById('result').innerHTML='<div class="big">$'+net.toFixed(2)+' per paycheck</div>'+
+'<div style="margin-top:10px;font-size:15px">Gross: $'+gross.toFixed(2)+'<br>'+
+'Federal Tax: -$'+fedPer.toFixed(2)+'<br>'+
+'DC Tax: -$'+dcPer.toFixed(2)+'<br>'+
+'FICA: -$'+ficaPer.toFixed(2)+'<br>'+
+'<strong>Net: $'+net.toFixed(2)+'</strong></div>';
+}
+</script>
+
+</body>
+</html>
