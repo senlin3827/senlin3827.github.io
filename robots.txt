@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://senlin3827.github.io/sitemap.xml
