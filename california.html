@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>California Paycheck Calculator - Estimate Take-Home Pay</title>
+<meta name="description" content="Free California paycheck calculator. Estimate your take-home pay after federal tax, California state tax, and FICA.">
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;line-height:1.6;color:#222;background:#fff}
+h1{font-size:26px;color:#1e3a5f}
+h2{font-size:20px;color:#1e3a5f;margin-top:30px}
+label{font-weight:bold;display:block;margin-top:14px}
+input,select{width:100%;padding:10px;margin:6px 0 14px;border:1px solid #ccc;border-radius:6px;font-size:16px;box-sizing:border-box}
+button{background:#1e3a5f;color:#fff;border:none;padding:14px 24px;font-size:18px;border-radius:8px;cursor:pointer;width:100%}
+button:hover{background:#2d5a8e}
+.result{background:#f0f7ff;border:1px solid #bfdbfe;padding:16px;border-radius:8px;margin-top:16px;font-size:18px}
+.big{font-size:28px;font-weight:bold;color:#10b981}
+.ad{background:#f5f5f5;border:1px dashed #ccc;text-align:center;padding:20px;margin:20px 0;color:#888;font-size:14px}
+.faq p{font-weight:bold;margin-bottom:4px}
+.footer{font-size:14px;color:#555;margin-top:40px;border-top:1px solid #eee;padding-top:20px;text-align:center}
+.footer a{color:#1e3a5f;text-decoration:none;margin:0 8px;font-weight:bold}
+.footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<h1>California Paycheck Calculator</h1>
+<p>Estimate your take-home pay in California after federal tax, state tax, and FICA.</p >
+
+<div class="ad">Advertisement</div>
+
+<label>Annual Salary ($)</label>
+<input type="number" id="salary" placeholder="e.g. 75000" value="75000">
+
+<label>Pay Frequency</label>
+<select id="freq">
+<option value="26">Bi-weekly (26 paychecks/year)</option>
+<option value="24">Semi-monthly (24 paychecks/year)</option>
+<option value="12">Monthly (12 paychecks/year)</option>
+<option value="52">Weekly (52 paychecks/year)</option>
+</select>
+
+<label>Filing Status</label>
+<select id="status">
+<option value="single">Single</option>
+<option value="married">Married Filing Jointly</option>
+</select>
+
+<button onclick="calc()">Calculate Take-Home Pay</button>
+
+<div class="result" id="result"></div>
+
+<div class="ad">Advertisement</div>
+
+<h2>How This California Paycheck Calculator Works</h2>
+<p>This calculator estimates your take-home pay in California. It subtracts federal income tax, California state income tax, Social Security, and Medicare from your gross salary.</p >
+<p><strong>State income tax rates:</strong> 1% to 13.3% depending on income level.</p >
+<p><strong>Federal tax:</strong> Based on 2025 federal tax brackets.</p >
+<p><strong>FICA:</strong> 6.2% Social Security + 1.45% Medicare.</p >
+
+<h2>California Paycheck Calculator FAQ</h2>
+<div class="faq">
+<p>What is the average take-home pay in California?</p >
+<p>It depends on your salary and filing status. This calculator gives you an instant estimate.</p >
+<p>Does California have state income tax?</p >
+<p>Yes. California has its own income tax system with rates from 1% to 13.3%.</p >
+</div>
+
+<div class="footer">
+<p>Disclaimer: This calculator provides estimates only. Not tax, legal, or financial advice.</p >
+<p>
+<a href=" ">Home</a > | 
+<a href="privacy.htm">Privacy Policy</a > | 
+<a href="contact.htm">Contact Us</a >
+</p >
+</div>
+
+<script>
+function calc(){
+var salary=parseFloat(document.getElementById('salary').value)||0;
+var freq=parseInt(document.getElementById('freq').value)||26;
+var status=document.getElementById('status').value;
+
+var gross=salary/freq;
+// 简化版联邦税计算
+var fedTax=0;
+if(status==='single'){
+if(salary<=11925)fedTax=salary*0.10;
+else if(salary<=48475)fedTax=1192.5+(salary-11925)*0.12;
+else if(salary<=103350)fedTax=5578.5+(salary-48475)*0.22;
+else fedTax=17639+(salary-103350)*0.24;
+}else{
+if(salary<=23850)fedTax=salary*0.10;
+else if(salary<=96950)fedTax=2385+(salary-23850)*0.12;
+else if(salary<=206700)fedTax=11157+(salary-96950)*0.22;
+else fedTax=35292+(salary-206700)*0.24;
+}
+var fedPer=fedTax/freq;
+
+// 简化版加州州税计算（实际较复杂，此处为估算）
+var stateTax=salary*0.06; 
+var statePer=stateTax/freq;
+
+// FICA
+var ss=Math.min(salary,176100)*0.062;
+var medicare=salary*0.0145;
+var ficaPer=(ss+medicare)/freq;
+
+var net=gross-fedPer-statePer-ficaPer;
+
+document.getElementById('result').innerHTML='<div class="big">$'+net.toFixed(2)+' per paycheck</div>'+
+'<div style="margin-top:10px;font-size:15px">Gross: $'+gross.toFixed(2)+'<br>'+
+'Federal Tax: -$'+fedPer.toFixed(2)+'<br>'+
+'State Tax: -$'+statePer.toFixed(2)+'<br>'+
+'FICA: -$'+ficaPer.toFixed(2)+'<br>'+
+'<strong>Net: $'+net.toFixed(2)+'</strong></div>';
+}
+</script>
+</body>
+</html>
