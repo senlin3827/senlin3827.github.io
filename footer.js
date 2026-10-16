@@ -1,4 +1,27 @@
 document.write(`
+<style>
+.footer {
+    font-size: 14px;
+    color: #555;
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+    line-height: 1.6;
+}
+.footer p {
+    margin: 8px 0;
+}
+.footer a {
+    color: #1e3a5f;
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: bold;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+</style>
 <div class="footer">
 <p>Disclaimer: This calculator provides estimates only. Not tax, legal, or financial advice.</p >
 <p>
