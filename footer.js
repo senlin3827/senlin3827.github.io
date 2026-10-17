@@ -1,26 +1,8 @@
 document.write(`
 <style>
-.footer {
-    font-size: 14px;
-    color: #555;
-    margin-top: 40px;
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-    text-align: center;
-    line-height: 1.6;
-}
-.footer p {
-    margin: 8px 0;
-}
-.footer a {
-    color: #1e3a5f;
-    text-decoration: none;
-    margin: 0 8px;
-    font-weight: bold;
-}
-.footer a:hover {
-    text-decoration: underline;
-}
+.footer{font-size:14px;color:#555;margin-top:40px;border-top:1px solid #eee;padding-top:20px;text-align:center}
+.footer a{color:#1e3a5f;text-decoration:none;margin:0 8px;font-weight:bold}
+.footer a:hover{text-decoration:underline}
 </style>
 <div class="footer">
 <p>Disclaimer: This calculator provides estimates only. Not tax, legal, or financial advice.</p >
@@ -35,7 +17,7 @@ document.write(`
 <a href="pennsylvania.html">Pennsylvania</a > | 
 <a href="ohio.html">Ohio</a > | 
 <a href="northcarolina.html">North Carolina</a > | 
-<a href="georgia.html">Georgia</a > |
+<a href="georgia.html">Georgia</a > | 
 <a href="michigan.html">Michigan</a > | 
 <a href="privacy.htm">Privacy Policy</a > | 
 <a href="about.htm">About Us</a > | 
@@ -43,3 +25,20 @@ document.write(`
 </p >
 </div>
 `);
+
+// === 动态加载 Adsterra 广告 ===
+var adScript1 = document.createElement('script');
+adScript1.async = true;
+adScript1.setAttribute('data-cfasync', 'false');
+adScript1.src = 'https://bauval.org/21/fcec26b394de33bad7e95f937766820d';
+document.body.appendChild(adScript1);
+
+var adDiv = document.createElement('div');
+adDiv.id = 'container-fcec26b394de33bad7e95f937766820d';
+document.body.appendChild(adDiv);
+
+var adScript2 = document.createElement('script');
+adScript2.async = true;
+adScript2.setAttribute('data-cfasync', 'false');
+adScript2.src = 'https://bauval.org/14/0ed07f891aed8833556c6d7ef2664043';
+document.body.appendChild(adScript2);
