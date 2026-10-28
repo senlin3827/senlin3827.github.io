@@ -21,6 +21,9 @@ document.write(`
 <a href="michigan.html">Michigan</a > | 
 <a href="arizona.html">Arizona</a > | 
 <a href="massachusetts.html">Massachusetts</a > | 
+<a href="newjersey.html">New Jersey</a > | 
+<a href="virginia.html">Virginia</a > | 
+<a href="nevada.html">Nevada</a > |
 <a href="privacy.htm">Privacy Policy</a > | 
 <a href="about.htm">About Us</a > | 
 <a href="contact.htm">Contact Us</a >
