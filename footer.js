@@ -47,3 +47,11 @@ adScript2.async = true;
 adScript2.setAttribute('data-cfasync', 'false');
 adScript2.src = 'https://bauval.org/14/0ed07f891aed8833556c6d7ef2664043';
 document.body.appendChild(adScript2);
+// === 全站统一加载 百度统计 ===
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3366ba8d29550db165b585b128c503b5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
