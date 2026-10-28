@@ -19,7 +19,7 @@ document.write(`
 <a href="northcarolina.html">North Carolina</a > | 
 <a href="georgia.html">Georgia</a > | 
 <a href="michigan.html">Michigan</a > | 
-<a href="arizon.html">Arizona</a > | 
+<a href="arizona.html">Arizona</a > | 
 <a href="massachusetts.html">Massachusetts</a > | 
 <a href="privacy.htm">Privacy Policy</a > | 
 <a href="about.htm">About Us</a > | 
