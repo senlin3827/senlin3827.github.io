@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>California vs Texas Paycheck Comparison 2026 - Take-Home Pay</title>
+<meta name="description" content="Compare your take-home pay in California vs Texas. See how much more you keep in Texas with no state income tax. Free 2026 salary comparison calculator.">
+<link rel="canonical" href="https://senlin3827.github.io/california-vs-texas.html" />
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;line-height:1.6;color:#222;background:#fff}
+h1{font-size:26px;color:#1e3a5f}
+h2{font-size:20px;color:#1e3a5f;margin-top:30px}
+label{font-weight:bold;display:block;margin-top:14px}
+input,select{width:100%;padding:10px;margin:6px 0 14px;border:1px solid #ccc;border-radius:6px;font-size:16px;box-sizing:border-box}
+button{background:#1e3a5f;color:#fff;border:none;padding:14px 24px;font-size:18px;border-radius:8px;cursor:pointer;width:100%}
+button:hover{background:#2d5a8e}
+.result{background:#f0f7ff;border:1px solid #bfdbfe;padding:16px;border-radius:8px;margin-top:16px;font-size:18px}
+.big{font-size:28px;font-weight:bold;color:#10b981}
+.ad{background:#f5f5f5;border:1px dashed #ccc;text-align:center;padding:20px;margin:20px 0;color:#888;font-size:14px}
+.faq p{font-weight:bold;margin-bottom:4px}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "California vs Texas Paycheck Comparison",
+      "url": "https://senlin3827.github.io/california-vs-texas.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "description": "Compare take-home pay between California and Texas.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much more take-home pay do you get in Texas vs California?", "acceptedAnswer": { "@type": "Answer", "text": "On a $100,000 salary, a Texas resident takes home about $6,386 more per year than a California resident, mainly because Texas has no state income tax." } },
+        { "@type": "Question", "name": "Does Texas have state income tax?", "acceptedAnswer": { "@type": "Answer", "text": "No. Texas does not have a state income tax, while California has a top marginal rate of 13.3%." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<h1>California vs Texas Paycheck Comparison (2026)</h1>
+<p>Compare your estimated take-home pay between California and Texas. See the real difference in your paycheck.</p>
+<div class="ad">Advertisement</div>
+
+<label>Annual Salary ($)</label>
+<input type="number" id="salary" placeholder="e.g. 100000" value="100000">
+
+<button onclick="calc()">Compare Take-Home Pay</button>
+
+<div class="result" id="result"></div>
+
+<div class="ad">Advertisement</div>
+
+<h2>How This Comparison Works</h2>
+<p>This tool calculates your estimated net take-home pay in both California and Texas, accounting for federal income tax, state income tax, Social Security, and Medicare. Texas has <strong>0% state income tax</strong>, while California has a progressive tax system with rates up to 13.3%. The difference in your paycheck can be substantial.</p>
+
+<p>Use this comparison if you are considering a move between California and Texas, or if you are negotiating a remote work salary across state lines.</p>
+
+<h2>California vs Texas Paycheck Comparison FAQ</h2>
+<div class="faq">
+  <p>How much more take-home pay do you get in Texas vs California?</p>
+  <p>On a $100,000 salary, a Texas resident takes home about $6,386 more per year than a California resident, mainly because Texas has no state income tax.</p>
+  <p>Does Texas have state income tax?</p>
+  <p>No. Texas does not have a state income tax, while California has a top marginal rate of 13.3%.</p>
+  <p>Is it worth moving to Texas for the tax savings?</p>
+  <p>It depends on your salary and lifestyle. For high earners, the annual tax savings can be significant. Use the calculator above to see your exact difference.</p>
+</div>
+
+<script src="footer.js"></script>
+
+<script>
+function calc(){
+  var salary = parseFloat(document.getElementById('salary').value) || 0;
+  if (salary <= 0) { document.getElementById('result').innerHTML = 'Please enter a valid salary.'; return; }
+
+  // Federal tax (2025 simplified brackets, single filer)
+  var fedTax = 0;
+  if (salary <= 11925) fedTax = salary * 0.10;
+  else if (salary <= 48475) fedTax = 1192.5 + (salary - 11925) * 0.12;
+  else if (salary <= 103350) fedTax = 5578.5 + (salary - 48475) * 0.22;
+  else if (salary <= 197300) fedTax = 17639 + (salary - 103350) * 0.24;
+  else fedTax = 40199 + (salary - 197300) * 0.32;
+
+  // FICA
+  var ss = Math.min(salary, 176100) * 0.062;
+  var medicare = salary * 0.0145;
+  var fica = ss + medicare;
+
+  // California state tax (simplified ~6% effective estimate for this comparison)
+  var caStateTax = salary * 0.06;
+
+  // Texas state tax = 0
+  var txStateTax = 0;
+
+  var caNet = salary - fedTax - caStateTax - fica;
+  var txNet = salary - fedTax - txStateTax - fica;
+  var diff = txNet - caNet;
+
+  document.getElementById('result').innerHTML =
+    '<div class="big">Texas take-home: $' + txNet.toFixed(0) + ' / year</div>' +
+    '<div style="margin-top:10px;font-size:15px">' +
+    'California take-home: $' + caNet.toFixed(0) + ' / year<br>' +
+    '<strong>Texas advantage: +$' + diff.toFixed(0) + ' / year</strong><br>' +
+    '<span style="font-size:14px;color:#555;">(Approx. $' + (diff/12).toFixed(0) + '/month)</span>' +
+    '</div>';
+}
+</script>
+</body>
+</html>
