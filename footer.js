@@ -10,7 +10,6 @@ document.write(`
 <a href="index.html">Home</a > | 
 <a href="california.html">California</a > | 
 <a href="texas.html">Texas</a > | 
-<a href="california-vs-texas.html" style="color:#d97706;">CA vs TX Tax</a > | 
 <a href="newyork.html">New York</a > | 
 <a href="florida.html">Florida</a > | 
 <a href="washington.html">Washington</a > | 
@@ -28,6 +27,10 @@ document.write(`
 <a href="privacy.htm">Privacy Policy</a > | 
 <a href="about.htm">About Us</a > | 
 <a href="contact.htm">Contact Us</a >
+<br><strong>State Comparisons:</strong><br>
+<a href="california-vs-texas.html" style="color:#d97706;">CA vs TX</a> | 
+<a href="new-york-vs-florida.html" style="color:#d97706;">NY vs FL</a> | 
+<a href="california-vs-nevada.html" style="color:#d97706;">CA vs NV</a>
 </p >
 </div>
 `);
