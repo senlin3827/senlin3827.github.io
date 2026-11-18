@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New York vs Florida Paycheck Comparison 2026 - Take-Home Pay</title>
+<meta name="description" content="Compare your take-home pay in New York vs Florida. See how much more you keep in Florida with no state income tax. Free 2026 salary comparison calculator.">
+<link rel="canonical" href="https://senlin3827.github.io/new-york-vs-florida.html" />
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;line-height:1.6;color:#222;background:#fff}
+h1{font-size:26px;color:#1e3a5f}
+h2{font-size:20px;color:#1e3a5f;margin-top:30px}
+label{font-weight:bold;display:block;margin-top:14px}
+input,select{width:100%;padding:10px;margin:6px 0 14px;border:1px solid #ccc;border-radius:6px;font-size:16px;box-sizing:border-box}
+button{background:#1e3a5f;color:#fff;border:none;padding:14px 24px;font-size:18px;border-radius:8px;cursor:pointer;width:100%}
+button:hover{background:#2d5a8e}
+.result{background:#f0f7ff;border:1px solid #bfdbfe;padding:16px;border-radius:8px;margin-top:16px;font-size:18px}
+.big{font-size:28px;font-weight:bold;color:#10b981}
+.ad{background:#f5f5f5;border:1px dashed #ccc;text-align:center;padding:20px;margin:20px 0;color:#888;font-size:14px}
+.faq p{font-weight:bold;margin-bottom:4px}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "New York vs Florida Paycheck Comparison",
+      "url": "https://senlin3827.github.io/new-york-vs-florida.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "description": "Compare take-home pay between New York and Florida.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much more take-home pay do you get in Florida vs New York?", "acceptedAnswer": { "@type": "Answer", "text": "On a $100,000 salary, a Florida resident takes home significantly more per year than a New York City resident, primarily because Florida has no state income tax and no local city tax." } },
+        { "@type": "Question", "name": "Does Florida have state income tax?", "acceptedAnswer": { "@type": "Answer", "text": "No. Florida does not have a state income tax, while New York has a top marginal rate of 10.9% plus NYC local tax." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<h1>New York vs Florida Paycheck Comparison (2026)</h1>
+<p>Compare your estimated take-home pay between New York and Florida. See the real difference in your paycheck.</p>
+<div class="ad">Advertisement</div>
+
+<label>Annual Salary ($)</label>
+<input type="number" id="salary" placeholder="e.g. 100000" value="100000">
+
+<button onclick="calc()">Compare Take-Home Pay</button>
+
+<div class="result" id="result"></div>
+
+<div class="ad">Advertisement</div>
+
+<h2>How This Comparison Works</h2>
+<p>This tool calculates your estimated net take-home pay in both New York and Florida, accounting for federal income tax, state income tax, Social Security, and Medicare. Florida has <strong>0% state income tax</strong>, while New York has a progressive tax system with rates up to 10.9%, plus additional local taxes if you live in New York City. The difference in your paycheck can be massive.</p>
+
+<p>Use this comparison if you are considering a move between New York and Florida, especially if you are retiring or working remotely.</p>
+
+<h2>New York vs Florida Paycheck Comparison FAQ</h2>
+<div class="faq">
+  <p>How much more take-home pay do you get in Florida vs New York?</p>
+  <p>On a $100,000 salary, a Florida resident takes home significantly more per year than a New York City resident, primarily because Florida has no state income tax and no local city tax.</p>
+  <p>Does Florida have state income tax?</p>
+  <p>No. Florida does not have a state income tax, while New York has a top marginal rate of 10.9% plus local tax.</p>
+  <p>Is it worth moving to Florida for the tax savings?</p>
+  <p>It depends on your salary and lifestyle. For high earners and retirees, the annual tax savings can be substantial. Use the calculator above to see your exact difference.</p>
+</div>
+
+<script src="footer.js"></script>
+
+<script>
+function calc(){
+  var salary = parseFloat(document.getElementById('salary').value) || 0;
+  if (salary <= 0) { document.getElementById('result').innerHTML = 'Please enter a valid salary.'; return; }
+
+  // Federal tax (2025 simplified brackets, single filer)
+  var fedTax = 0;
+  if (salary <= 11925) fedTax = salary * 0.10;
+  else if (salary <= 48475) fedTax = 1192.5 + (salary - 11925) * 0.12;
+  else if (salary <= 103350) fedTax = 5578.5 + (salary - 48475) * 0.22;
+  else if (salary <= 197300) fedTax = 17639 + (salary - 103350) * 0.24;
+  else fedTax = 40199 + (salary - 197300) * 0.32;
+
+  // FICA
+  var ss = Math.min(salary, 176100) * 0.062;
+  var medicare = salary * 0.0145;
+  var fica = ss + medicare;
+
+  // New York state tax (simplified effective estimate ~7% including local tax)
+  var nyStateTax = salary * 0.07;
+
+  // Florida state tax = 0
+  var flStateTax = 0;
+
+  var nyNet = salary - fedTax - nyStateTax - fica;
+  var flNet = salary - fedTax - flStateTax - fica;
+  var diff = flNet - nyNet;
+
+  document.getElementById('result').innerHTML =
+    '<div class="big">Florida take-home: $' + flNet.toFixed(0) + ' / year</div>' +
+    '<div style="margin-top:10px;font-size:15px">' +
+    'New York take-home: $' + nyNet.toFixed(0) + ' / year<br>' +
+    '<strong>Florida advantage: +$' + diff.toFixed(0) + ' / year</strong><br>' +
+    '<span style="font-size:14px;color:#555;">(Approx. $' + (diff/12).toFixed(0) + '/month)</span>' +
+    '</div>';
+}
+</script>
+</body>
+</html>
