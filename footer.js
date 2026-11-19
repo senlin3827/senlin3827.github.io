@@ -30,7 +30,9 @@ document.write(`
 <br><strong>State Comparisons:</strong><br>
 <a href="california-vs-texas.html" style="color:#d97706;">CA vs TX</a> | 
 <a href="new-york-vs-florida.html" style="color:#d97706;">NY vs FL</a> | 
-<a href="california-vs-nevada.html" style="color:#d97706;">CA vs NV</a>
+<a href="california-vs-nevada.html" style="color:#d97706;">CA vs NV</a> |
+<a href="illinois-vs-texas.html" style="color:#d97706;">IL vs TX</a> | 
+<a href="washington-vs-california.html" style="color:#d97706;">WA vs CA</a>
 </p >
 </div>
 `);
