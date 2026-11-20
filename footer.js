@@ -11,6 +11,7 @@ document.write(`
 <a href="california.html">California</a > | 
 <a href="texas.html">Texas</a > | 
 <a href="newyork.html">New York</a > | 
+<a href="new-york-city-paycheck-calculator.html" style="color:#d97706;">NYC Tax Calc</a > | 
 <a href="florida.html">Florida</a > | 
 <a href="washington.html">Washington</a > | 
 <a href="illinois.html">Illinois</a > | 
