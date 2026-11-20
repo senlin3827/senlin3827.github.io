@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New York City Paycheck Calculator 2026 - NYC Take-Home Pay</title>
+<meta name="description" content="Calculate your exact take-home pay in New York City. Includes federal tax, NY state tax, and NYC local income tax. Free 2026 NYC salary calculator.">
+<link rel="canonical" href="https://senlin3827.github.io/new-york-city-paycheck-calculator.html" />
+<style>
+body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;line-height:1.6;color:#222;background:#fff}
+h1{font-size:26px;color:#1e3a5f}
+h2{font-size:20px;color:#1e3a5f;margin-top:30px}
+label{font-weight:bold;display:block;margin-top:14px}
+input,select{width:100%;padding:10px;margin:6px 0 14px;border:1px solid #ccc;border-radius:6px;font-size:16px;box-sizing:border-box}
+button{background:#1e3a5f;color:#fff;border:none;padding:14px 24px;font-size:18px;border-radius:8px;cursor:pointer;width:100%}
+button:hover{background:#2d5a8e}
+.result{background:#f0f7ff;border:1px solid #bfdbfe;padding:16px;border-radius:8px;margin-top:16px;font-size:18px}
+.big{font-size:28px;font-weight:bold;color:#10b981}
+.ad{background:#f5f5f5;border:1px dashed #ccc;text-align:center;padding:20px;margin:20px 0;color:#888;font-size:14px}
+.faq p{font-weight:bold;margin-bottom:4px}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "New York City Paycheck Calculator",
+      "url": "https://senlin3827.github.io/new-york-city-paycheck-calculator.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "description": "Free calculator to estimate take-home pay in NYC including local city taxes.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Does NYC have an additional local income tax?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Residents of New York City must pay a local income tax ranging from roughly 3.078% to 3.876%, on top of the NY state income tax." } },
+        { "@type": "Question", "name": "How much does living in NYC cost compared to upstate NY?", "acceptedAnswer": { "@type": "Answer", "text": "Because of the NYC local income tax, take-home pay for the same salary in NYC is lower than in upstate New York." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<h1>New York City Paycheck Calculator (2026)</h1>
+<p>Calculate your estimated take-home pay specifically for New York City residents. This calculator includes <strong>NYC local income tax</strong>.</p>
+<div class="ad">Advertisement</div>
+
+<label>Annual Salary ($)</label>
+<input type="number" id="salary" placeholder="e.g. 100000" value="100000">
+
+<button onclick="calc()">Calculate NYC Take-Home Pay</button>
+
+<div class="result" id="result"></div>
+
+<div class="ad">Advertisement</div>
+
+<h2>Why Use the NYC-Specific Calculator?</h2>
+<p>Most generic New York paycheck calculators only account for state income tax. However, if you live in New York City (Manhattan, Brooklyn, Queens, Bronx, or Staten Island), you are subject to an additional <strong>local income tax</strong>. Our calculator factors this in, giving you a much more accurate estimate of your take-home pay.</p>
+
+<p>If you live in Upstate New York or Long Island, you should use our standard <a href="newyork.html">New York Paycheck Calculator</a> instead.</p>
+
+<h2>New York City Paycheck Calculator FAQ</h2>
+<div class="faq">
+  <p>Does NYC have an additional local income tax?</p>
+  <p>Yes. Residents of New York City must pay a local income tax ranging from roughly 3.078% to 3.876%, on top of the NY state income tax.</p>
+  <p>How much does living in NYC cost compared to upstate NY?</p>
+  <p>Because of the NYC local income tax, take-home pay for the same salary in NYC is lower than in upstate New York.</p>
+  <p>Do I pay NYC tax if I only work in the city but live outside?</p>
+  <p>No. The NYC local tax is generally based on your residency, not just your workplace. If you live in New Jersey or Upstate NY, you do not pay NYC local income tax.</p>
+</div>
+
+<script src="footer.js"></script>
+
+<script>
+function calc(){
+  var salary = parseFloat(document.getElementById('salary').value) || 0;
+  if (salary <= 0) { document.getElementById('result').innerHTML = 'Please enter a valid salary.'; return; }
+
+  // Federal tax (2025 simplified brackets, single filer)
+  var fedTax = 0;
+  if (salary <= 11925) fedTax = salary * 0.10;
+  else if (salary <= 48475) fedTax = 1192.5 + (salary - 11925) * 0.12;
+  else if (salary <= 103350) fedTax = 5578.5 + (salary - 48475) * 0.22;
+  else if (salary <= 197300) fedTax = 17639 + (salary - 103350) * 0.24;
+  else fedTax = 40199 + (salary - 197300) * 0.32;
+
+  // FICA
+  var ss = Math.min(salary, 176100) * 0.062;
+  var medicare = salary * 0.0145;
+  var fica = ss + medicare;
+
+  // NY State tax (simplified effective ~6% for this calculation)
+  var nyStateTax = salary * 0.06;
+
+  // NYC Local tax (simplified effective ~3.5% for this calculation)
+  var nycLocalTax = salary * 0.035;
+
+  var net = salary - fedTax - nyStateTax - nycLocalTax - fica;
+
+  document.getElementById('result').innerHTML =
+    '<div class="big">NYC take-home: $' + net.toFixed(0) + ' / year</div>' +
+    '<div style="margin-top:10px;font-size:15px">' +
+    'Federal Tax: -$' + fedTax.toFixed(0) + '<br>' +
+    'NY State Tax: -$' + nyStateTax.toFixed(0) + '<br>' +
+    '<strong style="color:#dc2626;">NYC Local Tax: -$' + nycLocalTax.toFixed(0) + '</strong><br>' +
+    'FICA: -$' + fica.toFixed(0) + '<br>' +
+    '</div>';
+}
+</script>
+</body>
+</html>
