@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embeddable US Paycheck Calculator</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;padding:15px;background:#ffffff;color:#222;}
+h2{font-size:18px;color:#1e3a5f;margin-top:0;}
+label{font-weight:bold;font-size:14px;display:block;margin-top:10px;}
+input{width:100%;padding:8px;margin:4px 0 10px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;}
+button{background:#1e3a5f;color:#fff;border:none;padding:10px;font-size:16px;border-radius:4px;cursor:pointer;width:100%;}
+.result{background:#f0f7ff;padding:12px;border-radius:6px;margin-top:10px;font-size:16px;}
+.big{font-size:20px;font-weight:bold;color:#10b981;}
+.credit{text-align:center;font-size:12px;margin-top:15px;color:#888;border-top:1px solid #eee;padding-top:10px;}
+.credit a{color:#1e3a5f;text-decoration:none;font-weight:bold;}
+</style>
+</head>
+<body>
+<h2>US Paycheck Calculator</h2>
+<label>Annual Salary ($)</label>
+<input type="number" id="salary" placeholder="e.g. 75000" value="75000">
+<button onclick="calc()">Calculate Take-Home Pay</button>
+<div class="result" id="result"></div>
+
+<div class="credit">
+  Powered by <a href="https://senlin3827.github.io" target="_blank">US State Paycheck Calculators</a>
+</div>
+
+<script>
+function calc(){
+  var salary = parseFloat(document.getElementById('salary').value) || 0;
+  if (salary <= 0) { document.getElementById('result').innerHTML = 'Please enter a valid salary.'; return; }
+  var fedTax = 0;
+  if (salary <= 11925) fedTax = salary * 0.10;
+  else if (salary <= 48475) fedTax = 1192.5 + (salary - 11925) * 0.12;
+  else if (salary <= 103350) fedTax = 5578.5 + (salary - 48475) * 0.22;
+  else fedTax = 17639 + (salary - 103350) * 0.24;
+  var ss = Math.min(salary, 176100) * 0.062;
+  var medicare = salary * 0.0145;
+  var fica = ss + medicare;
+  var net = salary - fedTax - fica;
+  document.getElementById('result').innerHTML = '<div class="big">Take-Home: $' + net.toFixed(0) + ' / year</div>';
+}
+</script>
+</body>
+</html>
