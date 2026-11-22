@@ -1,0 +1,23 @@
+name: IndexNow Auto Submit
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  submit-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit sitemap to IndexNow
+        run: |
+          curl -X POST "https://api.indexnow.org/indexnow" \
+          -H "Content-Type: application/json; charset=utf-8" \
+          -d '{
+            "host": "senlin3827.github.io",
+            "key": "senlin3827taxdata2026",
+            "keyLocation": "https://senlin3827.github.io/senlin3827taxdata2026.txt",
+            "urlList": [
+              "https://senlin3827.github.io/sitemap.xml"
+            ]
+          }'
