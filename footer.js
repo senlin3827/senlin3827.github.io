@@ -28,12 +28,14 @@ document.write(`
 <a href="privacy.htm">Privacy Policy</a > | 
 <a href="about.htm">About Us</a > | 
 <a href="contact.htm">Contact Us</a >
-<br><strong>State Comparisons:</strong><br>
+<strong>State Comparisons:</strong><br>
 <a href="california-vs-texas.html" style="color:#d97706;">CA vs TX</a> | 
 <a href="new-york-vs-florida.html" style="color:#d97706;">NY vs FL</a> | 
-<a href="california-vs-nevada.html" style="color:#d97706;">CA vs NV</a> |
+<a href="california-vs-nevada.html" style="color:#d97706;">CA vs NV</a> | 
 <a href="illinois-vs-texas.html" style="color:#d97706;">IL vs TX</a> | 
 <a href="washington-vs-california.html" style="color:#d97706;">WA vs CA</a>
+<br><br>
+<span style="font-size:12px; color:#999;">Developers: <a href="embed.html" style="color:#999; text-decoration:underline;">Embed our Calculator on your site</a></span>
 </p >
 </div>
 `);
