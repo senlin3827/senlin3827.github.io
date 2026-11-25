@@ -80,11 +80,6 @@ button:hover{background:#2d5a8e}
 <div class="ad">Advertisement</div>
 
 <h2>How This DC Paycheck Calculator Works</h2>
-<div style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 20px; margin: 24px 0;">
-  <h3 style="margin-top: 0; color: #1e3a5f; font-size: 18px;">📊 2026 US State Tax Rates Dataset</h3>
-  <p style="font-size: 14px; color: #475569;">Download our free, structured CSV dataset containing state income tax rates, local taxes, and special payroll deductions for all supported states. Perfect for researchers, bloggers, and developers.</p>
-  <a href="us-state-tax-rates-2026.csv" download style="display: inline-block; background-color: #1e3a5f; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 14px;">⬇️ Download CSV Dataset</a>
-</div>
   
 <p>This calculator estimates your take-home pay in Washington DC by subtracting federal income tax, DC local income tax, Social Security, and Medicare from your gross salary. The District of Columbia has its own progressive tax system, with rates ranging from 4% to 10.75%. Additionally, many employees in DC are subject to local payroll taxes like the Universal Paid Leave (UPL) tax.</p>
 
@@ -93,6 +88,7 @@ button:hover{background:#2d5a8e}
 <h2>DC vs. Neighboring States (Virginia & Maryland)</h2>
 <p>How does DC compare? Washington DC has some of the highest income tax rates in the region. In contrast, neighboring <strong>Virginia</strong> has a top rate of 5.75%, and <strong>Maryland</strong> has a top rate of 5.75%. If you work in DC but live in Virginia, you may be subject to both states' tax rules, which can significantly impact your take-home pay.</p>
 
+<h2>DC Paycheck Calculator FAQ</h2>
 <h2>DC Paycheck Calculator FAQ</h2>
 <div class="faq">
   <p>Does Washington DC have a state income tax?</p>
@@ -103,50 +99,12 @@ button:hover{background:#2d5a8e}
   <p>It depends on your salary. Virginia's income tax rates are generally lower than DC's top rates. Many people choose to live in Virginia and commute to DC to take advantage of the lower state tax rates.</p>
 </div>
 
-<script>
-function calc(){
-var salary=parseFloat(document.getElementById('salary').value)||0;
-var freq=parseInt(document.getElementById('freq').value)||26;
-var status=document.getElementById('status').value;
+<div style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 20px; margin: 24px 0;">
+  <h3 style="margin-top: 0; color: #1e3a5f; font-size: 18px;">📊 2026 US State Tax Rates Dataset</h3>
+  <p style="font-size: 14px; color: #475569;">Download our free, structured CSV dataset containing state income tax rates for all supported states.</p>
+  <a href="us-state-tax-rates-2026.csv" download style="display: inline-block; background-color: #1e3a5f; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 14px;">⬇️ Download CSV Dataset</a>
+</div>
 
-var gross=salary/freq;
-
-var fedTax=0;
-if(status==='single'){
-if(salary<=11925)fedTax=salary*0.10;
-else if(salary<=48475)fedTax=1192.5+(salary-11925)*0.12;
-else if(salary<=103350)fedTax=5578.5+(salary-48475)*0.22;
-else fedTax=17639+(salary-103350)*0.24;
-}else{
-if(salary<=23850)fedTax=salary*0.10;
-else if(salary<=96950)fedTax=2385+(salary-23850)*0.12;
-else if(salary<=206700)fedTax=11157+(salary-96950)*0.22;
-else fedTax=35292+(salary-206700)*0.24;
-}
-var fedPer=fedTax/freq;
-
-var dcTax=0;
-if(salary<=10000)dcTax=salary*0.04;
-else if(salary<=40000)dcTax=400+(salary-10000)*0.06;
-else if(salary<=60000)dcTax=2200+(salary-40000)*0.065;
-else if(salary<=350000)dcTax=3500+(salary-60000)*0.085;
-else dcTax=28150+(salary-350000)*0.0925;
-var dcPer=dcTax/freq;
-
-var ss=Math.min(salary,176100)*0.062;
-var medicare=salary*0.0145;
-var ficaPer=(ss+medicare)/freq;
-
-var net=gross-fedPer-dcPer-ficaPer;
-
-document.getElementById('result').innerHTML='<div class="big">$'+net.toFixed(2)+' per paycheck</div>'+
-'<div style="margin-top:10px;font-size:15px">Gross: $'+gross.toFixed(2)+'<br>'+
-'Federal Tax: -$'+fedPer.toFixed(2)+'<br>'+
-'DC Tax: -$'+dcPer.toFixed(2)+'<br>'+
-'FICA: -$'+ficaPer.toFixed(2)+'<br>'+
-'<strong>Net: $'+net.toFixed(2)+'</strong></div>';
-}
-</script> 
 <div style="margin-top: 30px; padding: 15px; background: #f8fafc; border-left: 4px solid #1e3a5f;">
   <h3 style="margin-top: 0; font-size: 18px; color: #1e3a5f;">Related Tools</h3>
   <ul style="padding-left: 20px; line-height: 1.8;">
@@ -154,7 +112,46 @@ document.getElementById('result').innerHTML='<div class="big">$'+net.toFixed(2)+
     <li><a href="new-york-vs-florida.html" style="color: #2563eb;">New York vs. Florida Paycheck Comparison</a></li>
   </ul>
 </div>
-  
+
 <script src="footer.js"></script>
+
+<script>
+function calc(){
+  var salary=parseFloat(document.getElementById('salary').value)||0;
+  var freq=parseInt(document.getElementById('freq').value)||26;
+  var status=document.getElementById('status').value;
+  var gross=salary/freq;
+  var fedTax=0;
+  if(status==='single'){
+    if(salary<=11925)fedTax=salary*0.10;
+    else if(salary<=48475)fedTax=1192.5+(salary-11925)*0.12;
+    else if(salary<=103350)fedTax=5578.5+(salary-48475)*0.22;
+    else fedTax=17639+(salary-103350)*0.24;
+  }else{
+    if(salary<=23850)fedTax=salary*0.10;
+    else if(salary<=96950)fedTax=2385+(salary-23850)*0.12;
+    else if(salary<=206700)fedTax=11157+(salary-96950)*0.22;
+    else fedTax=35292+(salary-206700)*0.24;
+  }
+  var fedPer=fedTax/freq;
+  var dcTax=0;
+  if(salary<=10000)dcTax=salary*0.04;
+  else if(salary<=40000)dcTax=400+(salary-10000)*0.06;
+  else if(salary<=60000)dcTax=2200+(salary-40000)*0.065;
+  else if(salary<=350000)dcTax=3500+(salary-60000)*0.085;
+  else dcTax=28150+(salary-350000)*0.0925;
+  var dcPer=dcTax/freq;
+  var ss=Math.min(salary,176100)*0.062;
+  var medicare=salary*0.0145;
+  var ficaPer=(ss+medicare)/freq;
+  var net=gross-fedPer-dcPer-ficaPer;
+  document.getElementById('result').innerHTML='<div class="big">$'+net.toFixed(2)+' per paycheck</div>'+
+  '<div style="margin-top:10px;font-size:15px">Gross: $'+gross.toFixed(2)+'<br>'+
+  'Federal Tax: -$'+fedPer.toFixed(2)+'<br>'+
+  'DC Tax: -$'+dcPer.toFixed(2)+'<br>'+
+  'FICA: -$'+ficaPer.toFixed(2)+'<br>'+
+  '<strong>Net: $'+net.toFixed(2)+'</strong></div>';
+}
+</script>
 </body>
 </html>
